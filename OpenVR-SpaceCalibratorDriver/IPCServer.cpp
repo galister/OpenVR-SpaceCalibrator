@@ -69,7 +69,7 @@ void IPCServer::RunThread(IPCServer *_this)
 		LOG("socket failed in RunThread. Error: %s", strerror(errno));
 		return;
 	}
-	std::string socketPath = std::string(getenv("HOME")) + "/.local/share/OpenVR-SpaceCalibrator/socket";
+	std::string socketPath = std::string(getenv("XDG_RUNTIME_DIR")) + "/openvr-spacecal";
 	unlink(socketPath.c_str());
 	struct sockaddr_un serverAddress;
 	memset(&serverAddress, 0, sizeof(struct sockaddr_un));

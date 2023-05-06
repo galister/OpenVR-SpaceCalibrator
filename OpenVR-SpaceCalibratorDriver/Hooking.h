@@ -7,6 +7,7 @@
 #include <stdexcept>
 #include <vector>
 #include <unistd.h>
+#include <cstdint>
 
 class IHook
 {

@@ -20,7 +20,7 @@ fi
 
 echo "SteamVR found at $STEAMVR_DIR"
 
-cmake $SRC_DIR
+cmake -DCMAKE_EXPORT_COMPILE_COMMANDS=1 $SRC_DIR
 cp $SRC_DIR/lib/openvr/lib/linux64/libopenvr_api.so .
 
 make -j $(nproc)

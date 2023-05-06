@@ -20,7 +20,7 @@ void IPCClient::Connect()
 	if (fd == -1) {
 		throw std::runtime_error("Could not create socket");
 	}
-	std::string socketPath = std::string(getenv("HOME")) + "/.local/share/OpenVR-SpaceCalibrator/socket";
+	std::string socketPath = std::string(getenv("XDG_RUNTIME_DIR")) + "/openvr-spacecal";
 	struct sockaddr_un address;
 	memset(&address, 0, sizeof(struct sockaddr_un));
 	address.sun_family = AF_UNIX;
