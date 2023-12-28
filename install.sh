@@ -32,7 +32,17 @@ mkdir -p ~/.local/share/OpenVR-SpaceCalibrator
 
 python3 $SRC_DIR/driverInstall.py --vrpathreg "$VRPATHREG" --toInstall "01spacecalibrator"
 
+mkdir -p "/home/$USER/.local/share/icons"
+mkdir -p "/home/$USER/.local/share/applications"
+cp "OpenVR-SpaceCalibrator/icon.png" "/home/$USER/.local/share/icons/OpenVR-SpaceCalibrator.png"
+cp "openvrspacecalibrator.desktop" "openvrspacecalibrator.desktop.copy"
+sed -i -e "s|change-path-1|$PWD/build/OpenVR-SpaceCalibrator/openvr-spacecalibrator|g" "openvrspacecalibrator.desktop.copy"
+sed -i -e "s|change-path-2|$PWD/build/OpenVR-SpaceCalibrator|g" "openvrspacecalibrator.desktop.copy"
+mv "openvrspacecalibrator.desktop.copy" "/home/$USER/.local/share/applications/openvrspacecalibrator.desktop"
+
 echo "Driver is now installed."
-echo "Start SteamVR, then launch the companion software at:"
+echo "Start SteamVR, then launch the companion software from desktop programs or in terminal:"
 echo "./OpenVR-SpaceCalibrator/openvr-spacecalibrator"
+
+
 

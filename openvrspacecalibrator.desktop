@@ -1,0 +1,10 @@
+[Desktop Entry]
+Comment=OpenVR Space Calibrator.
+Exec=change-path-1
+GenericName=Game
+Icon=OpenVR-SpaceCalibrator
+Name=OpenVR-Space-Calibrator
+Path=change-path-2
+Terminal=false
+Type=Application
+Version=1.0

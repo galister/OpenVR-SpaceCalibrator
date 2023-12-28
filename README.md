@@ -1,7 +1,9 @@
 # Linux Port
+
 This is a Linux port of OpenVR Space Calibrator that I plan to maintain going forward.
 
 ## Credits
+
 - Original code by [pushrax](https://github.com/pushrax)
 - Base of this repo is the Linux fork by [gyroninja](https://github.com/gyroninja)
 - Hook logic from [AngriestSCV](https://github.com/AngriestSCV)'s fork
@@ -12,21 +14,26 @@ Please thank them as I'm just adding some very minor fixes.
 ## Join the Conversation
 
 Discussion of Space Cal as well as other Linux VR related topics:
+
 - Discord: https://discord.gg/gHwJ2vwSWV
 - Matrix Space: `#linux-vr-adventures:matrix.org`
 
 ## Building
+
 The following packages are required to build:
-  * `cmake`
-  * `glfw`
-  * `eigen`
-  * `openvr`
+
+* `cmake`
+* `glfw`
+* `eigen`
+* `openvr`
 
 Arch Linux:
-  * `pacman -S cmake glfw-x11 eigen openvr`
+
+* `pacman -S cmake glfw-x11 eigen openvr`
 
 Debian 11 / Ubuntu 22.10:
-  * `sudo apt install cmake libeigen3-dev libglfw3-dev libopenvr-dev`
+
+* `sudo apt install cmake libeigen3-dev libglfw3-dev libopenvr-dev`
 
 ```
 git clone https://github.com/galister/OpenVR-SpaceCalibrator.git
@@ -36,15 +43,10 @@ cd build
 ../install.sh
 ```
 
-## Running
-
-**If using ALVR AppImage, first extract the AppImage!**:
-- Extract the AppImage: `./ALVR-x86_64.AppImage --appimage-extract`
-- A folder `squashfs-root` is created. Put this somewhere nice.
-- From now on, run ALVR using the `AppRun` executable from the `squashfs-root` folder.
-- **You can't use SpaceCal with AppImage ALVR without extracting!**
+## Running**
 
 **If using ALVR**: 
+
 - Launch ALVR Dashboard
 - On the `Settings` tab:
   - Under `Headset`, set both `Position Recentering Mode` and `Rotation Recentering Mode` to `None`
@@ -54,23 +56,34 @@ cd build
 If you used the `install.sh` script, the driver will be loaded by SteamVR, but the companion software must be started separately every time.
 
 For best results, I recommend doing the calibration:
+
 - in SteamVR void/home, before launching any titles, especially if you have high latency or low frame rate
 - with all trackers already connected. I've seen some glitches when connecting new trackers.
 
 ### Step-by-step Guide to Calibrate using ALVR
 
 #### Verify settings
- - Settings/Headset tab -> `Show advanced options` -> `Use Headset Tracking System`: on
- - Installation tab: ALVR should be listed under `Registered Drivers`. If not, press `Register ALVR driver`
- 
+
+- Installation tab: ALVR should be listed under `Registered Drivers`. If not, press `Register ALVR driver`
+- Settings tab -> Steamvr launcher -> Driver launch action: Unregister ALVR at shutdown. This prevents OpenVR Space Calibrator from unregistering by alvr when closing steamvr.
+
 #### If you want to use Lighthouse-tracked controllers with ALVR (not needed if you just want trackers)
- - Settings/Headset tab -> `Controllers` -> `Tracked`: off
+
+- Settings/Headset tab -> `Controllers` -> `Tracked`: off
 
 #### Note to Pico users
+
 Pico users might also want to increase the sleep timeout to 5 minutes or higher, as you will lose calibration if the headset goes to sleep: [Link](https://www.reddit.com/r/PICO_VR/comments/zmspi9/i_managed_to_turn_off_the_pico_4s_sleep_mode_by/) \
 (Will not lose calibration on screen-off, as long as you disabled recentering as per above.)
 
+To prevent issues with constant recentering on Pico, please change the following in ALVR dashboard:
+
+* Settings -> Headset -> Position recentring mode: Disabled
+
+* Settings -> Headset -> Rotation recentring mode: Disabled
+
 ### Steps:
+
 If you have ALVR open at this point, close it as well as SteamVR.
 
 - Launch SteamVR and ALVR.
@@ -100,6 +113,7 @@ There are a few issues that can pop up. Luckily, these can all be identified bef
   - Verify that all trackers show up in SteamVR before you do start a title or calibrate, if anything's amiss, restart SteamVR
 - Head tracking is weird, image rotates differently than your headset, mountains of brown on the ALVR graph.
   - This I believe is related to the SteamVR-on-Linux vsync bug. Restarting SteamVR 1-2 times will fix it.
+  - Also may be caused by pressing recenter on steamvr dashboard (don't do that)
 
 ---
 
@@ -125,19 +139,21 @@ Once Space Calibrator has a calibration, it works in the background to keep your
 As part of first time setup, or when you make a change to your space (e.g. move a sensor), and occasionally as the calibration drifts over time (consumer VR tracking isn't perfectly stable), you'll need to run a calibration:
 
 1. Copy the chaperone/guardian bounds from your HMD's play space. This doesn't need to be run if your HMD's play space hasn't changed since last time you copied it. __Example:__ if you're using the Rift with Vive trackers and you bump a Vive lighthouse, or if the calibration has just drifted a little, you likely don't need to run this step, but if you bump an Oculus sensor you will (after running Oculus guardian setup again).
-    1. Run SteamVR, with only devices from your HMD's tracking system powered on. __Example:__ for Rift with Vive trackers, don't turn on the trackers yet.
-    2. Confirm your chaperone/guardian is set up with the walls in the right place. If you change it later, you need to run step again.
-    3. Open SPACE CAL in the SteamVR dashboard overlay.
-    4. Click `Copy Chaperone Bounds to profile`
+   
+   1. Run SteamVR, with only devices from your HMD's tracking system powered on. __Example:__ for Rift with Vive trackers, don't turn on the trackers yet.
+   2. Confirm your chaperone/guardian is set up with the walls in the right place. If you change it later, you need to run step again.
+   3. Open SPACE CAL in the SteamVR dashboard overlay.
+   4. Click `Copy Chaperone Bounds to profile`
 
 2. Calibrate devices.
-    1. Open SteamVR if you haven't already. Turn on some or all your devices.
-    2. Open SPACE CAL in the SteamVR dashboard overlay.
-    3. Select one device from the reference space on the left and one device from the target space on the right. If you turned on multiple devices from one space and can't tell which one is selected, click "Identify selected devices" to blink an LED or vibrate it. __Example:__ for Rift with Vive trackers, you'll see the Touch controllers on the left, and Vive trackers on the right. __Pro tip:__ if you turn on just one Vive tracker, you don't have to figure out which one is selected.
-    4. Hold these two devices in one hand, like they're glued together. If they slip, calibration won't work as well.
-    5. Click `Start Calibration`
-    6. Move and rotate your hand around slowly a few times, like you're calibrating the compass on your phone. You want to sample as many orientations as possible.
-    7. Done! A profile will be saved automatically. If you haven't already, turn on all your devices. Space Calibrator will automatically apply the calibration to devices as they turn on.
+   
+   1. Open SteamVR if you haven't already. Turn on some or all your devices.
+   2. Open SPACE CAL in the SteamVR dashboard overlay.
+   3. Select one device from the reference space on the left and one device from the target space on the right. If you turned on multiple devices from one space and can't tell which one is selected, click "Identify selected devices" to blink an LED or vibrate it. __Example:__ for Rift with Vive trackers, you'll see the Touch controllers on the left, and Vive trackers on the right. __Pro tip:__ if you turn on just one Vive tracker, you don't have to figure out which one is selected.
+   4. Hold these two devices in one hand, like they're glued together. If they slip, calibration won't work as well.
+   5. Click `Start Calibration`
+   6. Move and rotate your hand around slowly a few times, like you're calibrating the compass on your phone. You want to sample as many orientations as possible.
+   7. Done! A profile will be saved automatically. If you haven't already, turn on all your devices. Space Calibrator will automatically apply the calibration to devices as they turn on.
 
 ### Calibration outside of VR
 
