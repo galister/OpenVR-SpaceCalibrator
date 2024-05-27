@@ -111,9 +111,9 @@ There are a few issues that can pop up. Luckily, these can all be identified bef
   - This is likely because your dongle got disconnected momentarily.
 - One or more trackers just don't show up in SteamVR, even though they're solid green.
   - Verify that all trackers show up in SteamVR before you do start a title or calibrate, if anything's amiss, restart SteamVR
-- Head tracking is weird, image rotates differently than your headset, mountains of brown on the ALVR graph.
-  - This I believe is related to the SteamVR-on-Linux vsync bug. Restarting SteamVR 1-2 times will fix it.
-  - Also may be caused by pressing recenter on steamvr dashboard (don't do that)
+- Head tracking is weird, image rotates differently than your headset, ALVR graph showing red mountains.
+  - Restart SteamVR and make sure to connect the headset first, before you power on any lighthouse devices.
+  - If you saw an image on the headset at least once since starting SteamVR, it's safe to turn on lighthouse devices (even if the headset is no longer connected).
 
 ---
 
