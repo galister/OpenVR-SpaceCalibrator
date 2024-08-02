@@ -34,6 +34,7 @@ python3 $SRC_DIR/driverInstall.py --vrpathreg "$VRPATHREG" --toInstall "01spacec
 
 mkdir -p "/home/$USER/.local/share/icons"
 mkdir -p "/home/$USER/.local/share/applications"
+cd ..
 cp "OpenVR-SpaceCalibrator/icon.png" "/home/$USER/.local/share/icons/OpenVR-SpaceCalibrator.png"
 cp "openvrspacecalibrator.desktop" "openvrspacecalibrator.desktop.copy"
 sed -i -e "s|change-path-1|$PWD/build/OpenVR-SpaceCalibrator/openvr-spacecalibrator|g" "openvrspacecalibrator.desktop.copy"
