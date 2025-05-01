@@ -37,6 +37,8 @@ Debian 11 / Ubuntu 22.10:
 
 * `sudo apt install cmake libeigen3-dev libglfw3-dev libopenvr-dev`
 
+Once the dependencies above are installed:
+
 ```
 git clone https://github.com/galister/OpenVR-SpaceCalibrator.git
 cd OpenVR-SpaceCalibrator/
