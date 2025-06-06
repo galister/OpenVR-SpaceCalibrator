@@ -33,6 +33,10 @@ Arch Linux:
 
 * `pacman -S cmake glfw-x11 eigen openvr`
 
+Fedora Linux:
+
+* `sudo dnf install cmake eigen3-devel glfw-devel openvr-devel`
+
 Debian 11 / Ubuntu 22.10:
 
 * `sudo apt install cmake libeigen3-dev libglfw3-dev libopenvr-dev`
